@@ -1,0 +1,12 @@
+This is a placeholder to remind you to add your actual PDF certificates.
+
+Instructions:
+1. Rename your PDF files to match the names in the code
+2. Place them in this 'certificates' folder
+3. Each PDF should correspond to a certification in the App.tsx file
+
+Example file names:
+- um-python-data-structures.pdf
+- um-html5.pdf
+- ibm-cybersecurity.pdf
+- etc.
