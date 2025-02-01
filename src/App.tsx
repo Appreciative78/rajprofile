@@ -58,6 +58,22 @@ function App() {
   const [formSubmitSuccess, setFormSubmitSuccess] = useState(false);
   const [formSubmitError, setFormSubmitError] = useState('');
 
+  // Image loading and error handling
+  const [imageLoadError, setImageLoadError] = useState(false);
+
+  const handleImageError = () => {
+    setImageLoadError(true);
+    console.error('Image failed to load:', profileImages[currentImageIndex]);
+  };
+
+  // Cycle through images if one fails
+  const cycleImage = () => {
+    setCurrentImageIndex((prevIndex) => 
+      (prevIndex + 1) % profileImages.length
+    );
+    setImageLoadError(false);
+  };
+
   // Function to handle website redirection
   const handleWebsiteRedirect = (
     websiteName: string, 
@@ -340,38 +356,38 @@ function App() {
     return () => clearInterval(imageInterval);
   }, []);
 
-  const certifications = [
-    { 
-      title: 'University of Michigan - Python Data Structures', 
-      pdfPath: '/certificates/python data-struc.pdf' 
+  const certificates = [
+    {
+      name: 'Python Data Structures',
+      pdfPath: '/rajprofile/certificates/python data-struc.pdf'
     },
-    { 
-      title: 'University of Michigan - HTML5', 
-      pdfPath: '/certificates/um-html5.pdf' 
+    {
+      name: 'HTML5',
+      pdfPath: '/rajprofile/certificates/um-html5.pdf'
     },
-    { 
-      title: 'IBM - Cybersecurity Tools & Cyber Attacks', 
-      pdfPath: '/certificates/ibm-cybersecurity.pdf' 
+    {
+      name: 'IBM Cybersecurity',
+      pdfPath: '/rajprofile/certificates/ibm-cybersecurity.pdf'
     },
-    { 
-      title: 'IBM - Python for Data Science', 
-      pdfPath: '/certificates/ibm-python-data-science.pdf' 
+    {
+      name: 'IBM Python Data Science',
+      pdfPath: '/rajprofile/certificates/ibm-python-data-science.pdf'
     },
-    { 
-      title: 'Google - Python', 
-      pdfPath: '/certificates/google-python.pdf' 
+    {
+      name: 'Google Python',
+      pdfPath: '/rajprofile/certificates/google-python.pdf'
     },
-    { 
-      title: 'University of Michigan - Python for Everybody', 
-      pdfPath: '/certificates/um-python-for-everybody.pdf' 
+    {
+      name: 'Python for Everybody',
+      pdfPath: '/rajprofile/certificates/um-python-for-everybody.pdf'
     },
-    { 
-      title: 'Google - Data Analytics Professional', 
-      pdfPath: '/certificates/google-data-analytics.pdf' 
+    {
+      name: 'Google Data Analytics',
+      pdfPath: '/rajprofile/certificates/google-data-analytics.pdf'
     },
-    { 
-      title: 'IBM - Machine Learning Specialist', 
-      pdfPath: '/certificates/ibm-machine-learning.pdf' 
+    {
+      name: 'IBM Machine Learning',
+      pdfPath: '/rajprofile/certificates/ibm-machine-learning.pdf'
     }
   ];
 
@@ -382,9 +398,17 @@ function App() {
     }
   ];
 
+  const [certificateLoadError, setCertificateLoadError] = useState(false);
+
+  const handleCertificateError = () => {
+    setCertificateLoadError(true);
+    console.error('Certificate failed to load:', selectedCertificate);
+  };
+
   const openCertificateModal = (pdfPath: string) => {
     console.log('Opening Certificate:', pdfPath);
     setSelectedCertificate(pdfPath);
+    setCertificateLoadError(false);
   };
 
   const closeCertificateModal = () => {
@@ -618,6 +642,7 @@ function App() {
                       animate-fade-in
                       hover:scale-105 
                       hover:brightness-110"
+                      onError={handleImageError}
                     />
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30 
@@ -1208,21 +1233,7 @@ function App() {
                   </li>
                 </ul>
                 <div className="mt-6 flex justify-center">
-                  <button 
-                    onClick={() => openInternshipDocModal(internshipDocuments[0].pdfPath)}
-                    className="relative overflow-hidden group/button px-8 py-3 rounded-full 
-                      bg-gradient-to-r from-blue-600 to-cyan-500 
-                      text-white font-semibold text-sm
-                      transform transition-all duration-300 
-                      hover:-translate-y-1 hover:shadow-lg
-                      flex items-center space-x-2
-                      focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-                  >
-                    <span className="transition-transform group-hover/button:translate-x-0.5">
-                      View Certification
-                    </span>
-                    <ArrowRight className="w-4 h-4 opacity-0 group-hover/button:opacity-100 transition-all" />
-                  </button>
+                  
                 </div>
               </div>
             </div>
@@ -1236,7 +1247,7 @@ function App() {
                   <h3 className="text-xl font-bold">Certifications</h3>
                 </div>
                 <ul className="text-gray-400 space-y-4 flex-grow">
-                  {certifications.map((cert, index) => (
+                  {certificates.map((cert, index) => (
                     <li 
                       key={index} 
                       className="flex items-center justify-between group/item transition-colors bg-gradient-to-r from-[#0A0F1C] to-[#121b2e] hover:from-[#121b2e] hover:to-[#1a2640] rounded-xl p-4 mb-3 border border-blue-500/10 hover:border-blue-500/30 shadow-lg hover:shadow-xl transition-all duration-300"
@@ -1244,7 +1255,7 @@ function App() {
                       <div className="flex items-center space-x-4">
                         <BookOpen className="w-7 h-7 text-blue-500 group-hover/item:text-blue-400 transition-colors transform group-hover/item:scale-110" />
                         <span className="text-gray-300 group-hover/item:text-white text-[15px] font-medium transition-colors">
-                          {cert.title}
+                          {cert.name}
                         </span>
                       </div>
                       <button 
@@ -1601,34 +1612,45 @@ function App() {
 
       {/* Certificate Modal */}
       {selectedCertificate && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm">
-          <div className="relative bg-[#0A0F1C] rounded-2xl border-2 border-blue-500/30 w-[95%] max-w-5xl h-[95%] max-h-[900px] overflow-hidden flex flex-col shadow-2xl">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-cyan-500/10 opacity-50 pointer-events-none"></div>
-            
-            <div className="relative z-10 p-12 text-center">
-              <div className="mb-8">
-                <h2 className="text-3xl font-bold text-blue-300 mb-4">
-                  Certificate Verification
-                </h2>
-              </div>
-              <div className="flex-grow relative overflow-hidden">
-                <iframe 
-                  src={selectedCertificate} 
-                  className="w-full h-full"
-                  title="Certificate"
-                  width="100%"
-                  height="100%"
-                  frameBorder="0"
-                  style={{
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                    objectFit: 'contain',
-                    filter: 'contrast(1) brightness(1)'
-                  }}
-                />
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-70"></div>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
+          <div className="relative bg-white rounded-xl shadow-2xl p-6 w-[95%] max-w-[1200px] h-[90vh] flex flex-col">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl font-bold text-gray-800">
+                Certificate Verification
+              </h2>
+              <button 
+                onClick={closeCertificateModal}
+                className="text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 p-2 rounded-full transition-all"
+              >
+                <X className="w-6 h-6" />
+              </button>
             </div>
+            
+            <div className="flex-grow overflow-hidden rounded-lg border-2 border-gray-100">
+              <iframe 
+                src={selectedCertificate} 
+                title="Certificate"
+                className="w-full h-full"
+                onError={handleCertificateError}
+                allowFullscreen
+              />
+            </div>
+
+            {certificateLoadError && (
+              <div className="absolute inset-0 bg-white flex flex-col items-center justify-center space-y-4">
+                <p className="text-red-500 text-lg font-semibold">
+                  Unable to load certificate
+                </p>
+                <button 
+                  onClick={() => {
+                    setCertificateLoadError(false);
+                  }}
+                  className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-all"
+                >
+                  Retry Loading
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -1636,7 +1658,7 @@ function App() {
       {/* Internship Document Modal */}
       {selectedInternshipDoc && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm">
-          <div className="relative bg-[#0A0F1C] rounded-2xl border-2 border-blue-500/30 w-[95%] max-w-5xl h-[95%] max-h-[900px] overflow-hidden flex flex-col shadow-2xl">
+          <div className="bg-[#0A0F1C] rounded-2xl p-12 max-w-5xl h-[95%] max-h-[900px] overflow-hidden flex flex-col shadow-2xl">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-cyan-500/10 opacity-50 pointer-events-none"></div>
             
             <div className="relative z-10 p-12 text-center">
@@ -1685,9 +1707,13 @@ function App() {
 
             <div className="flex justify-center mb-6">
               <img 
-                src="/images/profile/rohit-kumar-profile.png" 
+                src="/rajprofile/images/profile/rohit-kumar-profile.png" 
                 alt="Viper Imagination Logo" 
                 className="w-24 h-24 rounded-full border-4 border-blue-500/50"
+                onError={(e) => {
+                  console.error('Image failed to load');
+                  e.currentTarget.src = '/rajprofile/images/profile/rf.jpg'; // Fallback image
+                }}
               />
             </div>
             <h2 className="text-2xl font-bold text-blue-300 mb-4">
@@ -1728,9 +1754,13 @@ function App() {
 
             <div className="flex justify-center mb-6">
               <img 
-                src="/images/profile/rohit-kumar-profile.png" 
+                src="/rajprofile/images/profile/rohit-kumar-profile.png" 
                 alt="Viper Imagination Logo" 
                 className="w-24 h-24 rounded-full border-4 border-blue-500/50"
+                onError={(e) => {
+                  console.error('Image failed to load');
+                  e.currentTarget.src = '/rajprofile/images/profile/rf.jpg'; // Fallback image
+                }}
               />
             </div>
             <h2 className="text-2xl font-bold text-blue-300 mb-4">
