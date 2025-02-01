@@ -30,8 +30,8 @@ function App() {
   const [selectedInternshipDoc, setSelectedInternshipDoc] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const profileImages = [
-    '/rajprofile/images/profile/rohit-kumar-profile.png',
-    '/rajprofile/images/profile/rf.jpg'
+    `${import.meta.env.BASE_URL}images/profile/rohit-kumar-profile.png`,
+    `${import.meta.env.BASE_URL}images/profile/rf.jpg`
 ];
 
   // State for redirect modal
