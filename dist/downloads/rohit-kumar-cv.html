@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rohit Kumar - Professional CV</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        
+        .cv-container {
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            padding: 40px;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #007bff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .contact-info {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        .job, .education, .certification {
+            margin-bottom: 20px;
+        }
+        
+        .job-title, .education-title, .certification-title {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .job-company, .education-institution {
+            color: #666;
+            font-style: italic;
+        }
+        
+        .job-description, .education-description, .certification-description {
+            color: #444;
+            margin-top: 5px;
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .skill-tag {
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+        }
+        
+        .footer {
+            text-align: center;
+            color: #666;
+            font-size: 0.8em;
+            margin-top: 30px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <div class="header">
+            <h1>Rohit Kumar</h1>
+            <div class="contact-info">
+                📍 India | 📧 contact@viperdimension.com | 💼 LinkedIn: rohit-kumar
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Professional Summary</h2>
+            <p>
+                Innovative software engineer with a robust background in full-stack development, 
+                cybersecurity, and artificial intelligence. Proven track record of delivering 
+                cutting-edge technological solutions with a focus on security, performance, 
+                and user experience.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">Cybersecurity</span>
+                <span class="skill-tag">Machine Learning</span>
+                <span class="skill-tag">AWS</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">Git</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Professional Experience</h2>
+            
+            <div class="job">
+                <div class="job-title">Software Development Intern</div>
+                <div class="job-company">Indian Space Research Organisation (ISRO)</div>
+                <ul class="job-description">
+                    <li>Developed advanced data processing algorithms for satellite imagery</li>
+                    <li>Collaborated with senior scientists to enhance mission-critical software systems</li>
+                    <li>Implemented machine learning models for predictive analysis</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-title">Cybersecurity Researcher</div>
+                <div class="job-company">Viper Imagination</div>
+                <ul class="job-description">
+                    <li>Conducted comprehensive security assessments for digital platforms</li>
+                    <li>Developed custom security solutions using advanced threat detection techniques</li>
+                    <li>Created robust encryption protocols for sensitive data protection</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Certifications</h2>
+            <div class="certification">
+                <div class="certification-title">Python for Data Science</div>
+                <div class="certification-institution">IBM</div>
+            </div>
+            <div class="certification">
+                <div class="certification-title">Cybersecurity Tools & Cyber Attacks</div>
+                <div class="certification-institution">IBM</div>
+            </div>
+            <div class="certification">
+                <div class="certification-title">Python Data Structures</div>
+                <div class="certification-institution">University of Michigan</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="education">
+                <div class="education-title">Bachelor of Technology</div>
+                <div class="education-institution">Computer Science & Engineering</div>
+                <div class="education-description">Specialization in Cybersecurity and Artificial Intelligence</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Projects</h2>
+            <ul>
+                <li>Personal Portfolio Website (https://viperdimension.com)</li>
+                <li>Advanced Cybersecurity Threat Detection System</li>
+                <li>Machine Learning-based Image Recognition Platform</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            Generated by Viper Imagination | Professional CV Generator
+        </div>
+    </div>
+</body>
+</html>
